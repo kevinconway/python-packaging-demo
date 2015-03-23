@@ -1,0 +1,39 @@
+{
+    "extensions": {
+        "enabled": [
+            "python_venv",
+            "blocks",
+            "file_permissions",
+            "file_extras"
+        ]
+    },
+    "core": {
+        "group": "Application/System",
+        "license": "MIT",
+        "name": "pollster",
+        "summary": "It polls and has eagle pictures.",
+        "version": "0.1.0"
+    },
+    "python_venv": {
+        "name": "pollster",
+        "path": "usr/share/python"
+    },
+    "blocks": {
+        "desc": [
+            "It polls and has eagle pictures."
+        ],
+        "post": [
+            "/usr/share/python/pollster/bin/pollster-manage collectstatic --noinput",
+            "/usr/share/python/pollster/bin/pollster-manage migrate",
+            "service pollster restart"
+        ]
+    },
+    "file_permissions": {
+        "user": "vagrant"
+    },
+    "file_extras": {
+        "files": [
+            "debian/pollster.upstart:etc/init/pollster.conf"
+        ]
+    }
+}

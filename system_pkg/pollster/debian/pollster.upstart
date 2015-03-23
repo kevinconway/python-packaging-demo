@@ -1,0 +1,32 @@
+# pollster - pollster service upstart script
+
+description "A polling service."
+
+# Stanzas
+#
+# Stanzas control when and how a process is started and stopped
+# See a list of stanzas here: http://upstart.ubuntu.com/wiki/Stanzas#respawn
+
+# When to start the service
+start on runlevel [2345]
+
+# When to stop the service
+stop on runlevel [016]
+
+# Automatically restart process if crashed
+# respawn
+
+# Essentially lets upstart know the process will detach itself to the background
+expect fork
+
+# Run before process
+pre-start script
+    [ -d /var/run/pollster ] || mkdir -p /var/run/pollster
+    [ -d /var/log/pollster ] || mkdir -p /var/log/pollster
+    [ -d /opt/pollster ] || mkdir -p /opt/pollster
+    chown vagrant /var/run/pollster
+    chown vagrant /var/log/pollster
+end script
+
+# Start the process
+exec /usr/share/python/pollster/bin/gunicorn -b 127.0.0.1:8080 --workers 4 --timeout 180 -D --pid /var/run/pollster/pollster.pid --access-logfile /var/log/pollster/access.log --error-logfile /var/log/pollster/error.log pollster.wsgi:application --chdir /var/run/pollster
