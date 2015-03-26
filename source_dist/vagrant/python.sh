@@ -7,7 +7,7 @@ sudo apt-get install -y git vim enchant
 sudo apt-get install -y postgresql-client libpq-dev nginx
 
 sudo pip install -U pip
-sudo pip install -U setuptools virtualenv tox pytest gunicorn
+sudo pip install -U setuptools virtualenv gunicorn
 
 
 # Server setup
@@ -15,6 +15,8 @@ mkdir -p /srv/www/static
 chown -R vagrant /srv/www/static
 chown -R vagrant /opt
 cp /home/vagrant/code/upstart/pollster.conf /etc/init/
+
+echo 'export PIP_INDEX_URL="http://pypi/simple"' >> /etc/profile.d/pypi.sh
 
 cat <<EOF > /etc/nginx/sites-enabled/default
 server {

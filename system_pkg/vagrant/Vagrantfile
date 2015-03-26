@@ -3,46 +3,46 @@ Vagrant.configure("2") do |config|
   ENV['VAGRANT_DEFAULT_PROVIDER'] = 'lxc'
   config.vm.box = "fgrehm/trusty64-lxc"
   config.vm.synced_folder "../", "/home/vagrant/code"
-  config.vm.synced_folder "./dotfiles", "/home/vagrant/dotfiles"
+  config.vm.provision "shell", inline: "echo '10.1.0.20    pypi' >> /etc/hosts"
 
   config.vm.define "dev" do |dev|
 
-    dev.vm.provision "shell", inline: "echo '10.1.0.3    db' >> /etc/hosts"
-    dev.vm.provision "shell", inline: "echo '10.1.0.4    prod1' >> /etc/hosts"
-    dev.vm.provision "shell", inline: "echo '10.1.0.5    prod2' >> /etc/hosts"
+    dev.vm.provision "shell", inline: "echo '10.1.0.13    db' >> /etc/hosts"
+    dev.vm.provision "shell", inline: "echo '10.1.0.14    prod1' >> /etc/hosts"
+    dev.vm.provision "shell", inline: "echo '10.1.0.15    prod2' >> /etc/hosts"
     dev.vm.provision "shell", path: "./python.sh"
     dev.vm.provision "shell", inline: "ln -s /home/vagrant/code/pollster /opt/"
-    dev.vm.network "private_network", ip: "10.1.0.2", lxc__bridge_name: 'vlxcbr1'
+    dev.vm.network "private_network", ip: "10.1.0.12", lxc__bridge_name: 'vlxcbr1'
 
   end
 
   config.vm.define "dev-db" do |dev_db|
 
     dev_db.vm.provision "shell", path: "./postgresql.sh"
-    dev_db.vm.network "private_network", ip: "10.1.0.3", lxc__bridge_name: 'vlxcbr1'
+    dev_db.vm.network "private_network", ip: "10.1.0.13", lxc__bridge_name: 'vlxcbr1'
 
   end
 
   config.vm.define "prod1" do |prod1|
 
-    prod1.vm.provision "shell", inline: "echo '10.1.0.6    db' >> /etc/hosts"
+    prod1.vm.provision "shell", inline: "echo '10.1.0.16    db' >> /etc/hosts"
     prod1.vm.provision "shell", path: "./python.sh"
-    prod1.vm.network "private_network", ip: "10.1.0.4", lxc__bridge_name: 'vlxcbr1'
+    prod1.vm.network "private_network", ip: "10.1.0.14", lxc__bridge_name: 'vlxcbr1'
 
   end
 
   config.vm.define "prod2" do |prod2|
 
-    prod2.vm.provision "shell", inline: "echo '10.1.0.6    db' >> /etc/hosts"
+    prod2.vm.provision "shell", inline: "echo '10.1.0.16    db' >> /etc/hosts"
     prod2.vm.provision "shell", path: "./python.sh"
-    prod2.vm.network "private_network", ip: "10.1.0.5", lxc__bridge_name: 'vlxcbr1'
+    prod2.vm.network "private_network", ip: "10.1.0.15", lxc__bridge_name: 'vlxcbr1'
 
   end
 
   config.vm.define "prod-db" do |prod_db|
 
     prod_db.vm.provision "shell", path: "./postgresql.sh"
-    prod_db.vm.network "private_network", ip: "10.1.0.6", lxc__bridge_name: 'vlxcbr1'
+    prod_db.vm.network "private_network", ip: "10.1.0.16", lxc__bridge_name: 'vlxcbr1'
 
   end
 

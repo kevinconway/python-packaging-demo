@@ -3,7 +3,7 @@ Vagrant.configure("2") do |config|
   ENV['VAGRANT_DEFAULT_PROVIDER'] = 'lxc'
   config.vm.box = "fgrehm/trusty64-lxc"
   config.vm.synced_folder "../", "/home/vagrant/code"
-  config.vm.synced_folder "./dotfiles", "/home/vagrant/dotfiles"
+  config.vm.provision "shell", inline: "echo '10.1.0.20    pypi' >> /etc/hosts"
 
   config.vm.define "dev" do |dev|
 
