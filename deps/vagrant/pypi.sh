@@ -43,7 +43,7 @@ server {
 EOF
 
 cat <<EOF > /usr/bin/reindex
-dpkg-scanpackages /srv/deb /dev/null | gzip -9c > /srv/deb/Packages.gz
+pushd /srv/deb && dpkg-scanpackages ./ /dev/null | gzip -9c > Packages.gz && popd
 EOF
 chmod +x /usr/bin/reindex
 service nginx restart
