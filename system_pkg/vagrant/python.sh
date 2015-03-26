@@ -40,11 +40,6 @@ server {
 }
 EOF
 cat <<EOF > /etc/apt/sources.list.d/private.list
-deb http://pypi/deb precise main restricted universe multiverse
-deb http://pypi/deb precise-updates main restricted universe multiverse
-deb http://pypi/deb precise-security main restricted universe multiverse
-deb-src http://pypi/deb precise main restricted universe multiverse
-deb-src http://pypi/deb precise-updates main restricted universe multiverse
-deb-src http://pypi/deb precise-security main restricted universe multiverse
+deb http://pypi/deb ./
 EOF
 service nginx restart
