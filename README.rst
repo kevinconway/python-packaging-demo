@@ -2,6 +2,30 @@
 Python Packaging Examples
 =========================
 
+Goal
+====
+
+Create a package for my Python application, or service, that meets the
+following specifications:
+
+Transmission
+------------
+
+All code an files should be distributed to production hosts using industry
+standard tools for managing packages.
+
+Depedency Management
+--------------------
+
+Dependencies should be automatically resolved by the package and resolved
+before deployment time.
+
+Post-Installation Scripting
+---------------------------
+
+Any scripts, or commands, that need to be executed during a deployment should
+be automatically triggered after the package installation.
+
 Code Layout
 ===========
 
