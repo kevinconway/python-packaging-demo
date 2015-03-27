@@ -11,7 +11,7 @@ following specifications:
 Transmission
 ------------
 
-All code an files should be distributed to production hosts using industry
+All code, and files, should be distributed to production hosts using industry
 standard tools for managing packages.
 
 Depedency Management
@@ -20,8 +20,8 @@ Depedency Management
 Dependencies should be automatically resolved by the package and resolved
 before deployment time.
 
-Post-Installation Scripting
----------------------------
+Extra Scripting
+---------------
 
 Any scripts, or commands, that need to be executed during a deployment should
 be automatically triggered after the package installation.
@@ -38,7 +38,7 @@ database.
 Environment Layout
 ==================
 
-Each example contains a Vagrantfile which will create five LXC containers.
+Each example contains a Vagrantfile that will create five LXC containers.
 Two containers represent the development environment and development database.
 The other three represent two production environments and a production
 database.
@@ -68,6 +68,9 @@ dependency server
 The dependency server, the Vagrantfile for which is in the '/deps' directory,
 hosts the private PYPI and apt repositories.
 
+For information on how to get start with vagrant+LXC check out the `project
+page on github <https://github.com/fgrehm/vagrant-lxc>`_
+
 Walking Through The Examples
 ============================
 
@@ -75,7 +78,7 @@ Custom Packaging
 ----------------
 
 The custom packaging example is intended as a sandbox for using non-packaging
-techniques for deploying code. An example scenario would go as follows:
+techniques to deploy code. An example scenario would go as follows:
 
 .. code-block:: shell
 
